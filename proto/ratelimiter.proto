@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package ratelimiter;
+
+option go_package = "ratelimiter/proto";
+
+service RateLimiterService {
+  rpc CheckRateLimit (CheckRequest) returns (CheckResponse);
+}
+
+message CheckRequest {
+  string user_id = 1;
+  string ip = 2;
+}
+
+message CheckResponse {
+  bool allowed = 1;
+  int32 retry_after = 2;
+}
